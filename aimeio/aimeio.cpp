@@ -54,7 +54,7 @@ static void aime_io_config_read(
 	assert(filename != NULL);
 
 	GetPrivateProfileStringW(
-		L"aime",
+		L"aimeio",
 		L"com",
 		L"COM1",
 		cfg->com,

@@ -14,7 +14,7 @@ uint8_t BanaKey[6] = { 0x60, 0x90, 0xD0, 0x06, 0x32, 0xF5 };
 
 int main()
 {
-	hsu.setCOM("COM3");
+	hsu.setCOM("COM10");
 
 	nfc.begin();
 
@@ -31,6 +31,23 @@ int main()
 
 	while (true)
 	{
+		uint8_t success; 
+		uint16_t SystemCode;
+		uint8_t IDm[8];
+		uint8_t PMm[8];
+
+
+		success = nfc.felica_Polling(0xFFFF, 0x00, IDm, PMm, &SystemCode, 0x0F);
+		if (success) {
+			printf("Found an Felica card");
+			printf("  IDm Value: ");
+			nfc.PrintHex(IDm, 8);
+			printf("\n");
+			printf("  PMm Value: ");
+			nfc.PrintHex(PMm, 8);
+			printf("\n");
+		}
+		/*
 		uint8_t success;
 		uint8_t uid[7] = { 0 };
 		uint8_t uidLength;
@@ -70,5 +87,6 @@ int main()
 				}
 			}
 		}
+		*/
 	}
 }
